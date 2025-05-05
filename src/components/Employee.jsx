@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {createEmployee, getEmployee} from "../service/EmployeeService.js";
+import {createEmployee, getEmployee, updateEmployee} from "../service/EmployeeService.js";
 import {useNavigate, useParams} from "react-router-dom";
 
 export default function Employee() {
@@ -55,18 +55,23 @@ export default function Employee() {
         return Object.keys(newErrors).length === 0;
     }
 
-    function saveEmployee(e) {
+    function saveOrUpdateEmployee(e) {
         e.preventDefault();
 
         if (!validateForm()) return;
 
         const employee = { firstName, lastName, email };
 
-        createEmployee(employee).then((response) => {
-            navigator('/employees');
-        });
+        if (id) {
+            updateEmployee(id, employee).then(() => {
+                navigator('/employees');
+            }).catch(err => console.error(err));
+        } else {
+            createEmployee(employee).then(() => {
+                navigator('/employees');
+            }).catch(err => console.error(err));
+        }
     }
-
     function pageTitle(){
         if (id){
             return  <h2 className='text-center'>Update Employee</h2>
@@ -122,7 +127,7 @@ export default function Employee() {
                                 {errors.email && <div className='invalid-feedback'>{errors.email}</div>}
                             </div>
 
-                            <button onClick={saveEmployee} className='btn btn-success'>Submit</button>
+                            <button onClick={saveOrUpdateEmployee} className='btn btn-success'>Submit</button>
                         </form>
                     </div>
                 </div>
