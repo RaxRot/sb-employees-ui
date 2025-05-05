@@ -6,6 +6,7 @@ import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import Employee from "./Employee.jsx";
 
 function App() {
   return <>
@@ -14,6 +15,8 @@ function App() {
           <Routes>
               <Route path='/' element={<ListEmployeeComponent/>}></Route>
               <Route path='/employees' element={<ListEmployeeComponent/>}></Route>
+
+              <Route path='/add-employee' element={<Employee/>}></Route>
           </Routes>
     <Footer/>
       </BrowserRouter>
