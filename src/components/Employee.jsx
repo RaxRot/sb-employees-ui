@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { createEmployee } from "../service/EmployeeService.js";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 export default function Employee() {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
-    const [errors, setErrors] = useState({}); // 👉 добавили состояние ошибок
+    const [errors, setErrors] = useState({});
+
+    const {id}=useParams();
 
     const navigator = useNavigate();
 
@@ -53,11 +55,19 @@ export default function Employee() {
         });
     }
 
+    function pageTitle(){
+        if (id){
+            return  <h2 className='text-center'>Update Employee</h2>
+        }else{
+            return <h2 className='text-center'>Add Employee</h2>
+        }
+    }
+
     return (
         <div className='container mt-5'>
             <div className='row'>
                 <div className='card col-md-6 offset-md-3 offset-md-3'>
-                    <h2 className='text-center'>Add Employee</h2>
+                    {pageTitle()}
                     <div className='card-body'>
                         <form>
 
