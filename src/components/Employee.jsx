@@ -1,9 +1,13 @@
 import {useState} from "react";
+import {createEmployee} from "../service/EmployeeService.js";
+import {useNavigate} from "react-router-dom";
 
 export default function Employee(){
     const [firstName,setFirstName]=useState('');
     const [lastName,setLastName]=useState('');
     const [email,setEmail]=useState('');
+
+    const navigator=useNavigate();
 
     function handleFirstName(e) {
         setFirstName(e.target.value);
@@ -20,6 +24,12 @@ export default function Employee(){
 
         const  employee={firstName,lastName,email};
         console.log(employee);
+
+        createEmployee(employee).then((response)=>{
+            console.log(response.data)
+            navigator('/employees')
+        });
+
     }
 
     return <div className='container mt-5'>
