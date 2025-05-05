@@ -20,6 +20,10 @@ export default function ListEmployeeComponent(){
         navigator('/add-employee')
     }
 
+    function updateEmployee(id) {
+        navigator(`/edit-employee/${id}`)
+    }
+
     return <div className="container">
     <h2 className="text-center mt-5">List of Employees</h2>
     <button className='btn btn-primary mb-2' onClick={addNewEmployee}>Add Employee</button>
