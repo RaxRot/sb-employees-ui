@@ -1,12 +1,13 @@
 
 import './App.css'
-import HelloWorld from "./HelloWorld.jsx";
 import ListEmployeeComponent from "./ListEmployeeComponent.jsx";
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Employee from "./Employee.jsx";
+import ListDepartmentComponent from "./ListDepartmentComponent.jsx";
+import Department from "./Department.jsx";
 
 function App() {
   return <>
@@ -19,6 +20,12 @@ function App() {
               <Route path='/add-employee' element={<Employee/>}></Route>
 
               <Route path='/edit-employee/:id' element={<Employee/>}></Route>
+
+              <Route path="/departments" element={<ListDepartmentComponent />} />
+
+              <Route path="/add-department" element={<Department />} />
+
+              <Route path="/edit-department/:id" element={<Department />} />
           </Routes>
     <Footer/>
       </BrowserRouter>
